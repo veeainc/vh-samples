@@ -1,0 +1,37 @@
+################################################################################
+# Copyright (C) Veea Systems Limited - All Rights Reserved.
+# Unauthorised copying of this file, via any medium is strictly prohibited.
+# Proprietary and confidential. [2019-2020]
+################################################################################
+app: vh storage example
+app_info:
+  container: application
+  deployment: single
+  description: Eample for accessing usb and other storage devices
+  node_types:
+  - MEN
+  targets:
+  - vhx09-10
+  - vhc05
+  type: app
+  version: 1.0.0
+  view: :9100
+docker:
+  ports:
+    publish:
+    - 9500:9500
+  secure:
+    arg:
+      partner_features: []
+    label:
+      devices: []
+      features:
+      - DEVELOPER
+      unauth_host: true
+      authorisation:
+        allowExternalStorage: true
+      volumes:
+        offers: []
+        persists: []
+        requests: []
+version: 2
