@@ -1,8 +1,3 @@
-################################################################################
-# Copyright (C) Veea Systems Limited - All Rights Reserved.
-# Unauthorised copying of this file, via any medium is strictly prohibited.
-# Proprietary and confidential. [2019-2020]
-################################################################################
 app: vh storage example
 app_info:
   container: application
@@ -19,17 +14,17 @@ app_info:
 docker:
   ports:
     publish:
-    - 9500:9500
   secure:
     arg:
       partner_features: []
     label:
+      authorisation:
+        allowexternalstorage: true
       devices: []
       features:
       - DEVELOPER
       unauth_host: true
-      authorisation:
-        allowExternalStorage: true
+      uuid: F94C425A-D977-4EA7-95FE-07673098178F
       volumes:
         offers: []
         persists: []
