@@ -1,0 +1,32 @@
+app: vh storage example
+app_info:
+  container: application
+  deployment: single
+  description: Eample for accessing usb and other storage devices
+  node_types:
+  - MEN
+  targets:
+  - vhx09-10
+  - vhc05
+  type: app
+  version: 1.0.0
+  view: :9100
+docker:
+  ports:
+    publish:
+  secure:
+    arg:
+      partner_features: []
+    label:
+      authorisation:
+        allowexternalstorage: true
+      devices: []
+      features:
+      - DEVELOPER
+      unauth_host: true
+      uuid: F94C425A-D977-4EA7-95FE-07673098178F
+      volumes:
+        offers: []
+        persists: []
+        requests: []
+version: 2
