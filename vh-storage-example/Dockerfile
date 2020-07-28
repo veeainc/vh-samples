@@ -4,25 +4,22 @@
 # Proprietary and confidential. [2019-2020]
 ################################################################################
 
-FROM golang:1.8-alpine as build
-
-RUN mkdir /app
-COPY src/ /app/
-WORKDIR /app
 
 #BEGIN vhc05
-FROM arm32v7/busybox
+FROM arm32v7/alpine:3.9
 #END
+
 #BEGIN vhx09-10
-FROM arm64v8/busybox
+FROM arm64v8/alpine:latest
 #END
-EXPOSE 9500
-ENV PORT 9500
-ENV WELCOME_MESSAGE Welcome to the VeeaHub platform!
+
+RUN mkdir /app
+COPY src/ /app
+
+RUN apk add --no-cache bash
 
 LABEL com.veea.authorisation.allowExternalStorage="true"
 
-WORKDIR /example
-COPY --from=build /app /app
+WORKDIR /var/lib/veea
 
-CMD ["bash /app/storage-example.sh"]
+# CMD ["./app/storage-example.sh"]
