@@ -12,19 +12,15 @@ app_info:
   version: 1.0.0
   view: :9100
 docker:
-  ports:
-    publish:
   secure:
     arg:
       partner_features: []
     label:
-      authorisation:
-        allowexternalstorage: true
       devices: []
       features:
       - DEVELOPER
       unauth_host: true
-      uuid: F94C425A-D977-4EA7-95FE-07673098178F
+      uuid: BCA5756A-0530-414E-A085-33EE1AB02E94
       volumes:
         offers: []
         persists: []

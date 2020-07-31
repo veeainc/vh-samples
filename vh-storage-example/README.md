@@ -309,3 +309,277 @@ Attaching to stdin/stdout/stderr on C05BCB00C0A000001127:9001...
 Attaching to container 74de3f949d4eb5251de623ed3e01fa35625b3d490564832b9aca627a2df94fc5 C05BCB00C0A000001127:9000 (https://10.20.0.90:9000/containers/74de3f949d4eb5251de623ed3e01fa35625b3d490564832b9aca627a2df94fc5/attach)...
 Success
 ```
+
+
+# Example
+
+## 1. Build
+
+```bash
+$ vhc build
+Making all targets...
+Making vh_storage_example image for vhx09-10 target...
+Dockerfile is newer than Dockerfile.vhx09-10.
+Generating Dockerfile for Dockerfile.vhx09-10...
+Dockerfile.vhx09-10 is newer than bin/vh_storage_example-arm64v8:1.0.0.tar.
+Building vh_storage_example image for vhx09-10...
+Command Started
+Sending build context to Docker daemon  70.18MB
+Step 1/19 : FROM balenalib/aarch64-alpine:latest
+ ---> 439c44e5eecf
+Step 2/19 : RUN mkdir /app
+ ---> Using cache
+ ---> 1e4e6e369eae
+Step 3/19 : COPY src/ /app
+ ---> 504baf26b507
+Step 4/19 : RUN apk add --no-cache bash
+ ---> Running in 93a0b2ef3282
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/aarch64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/aarch64/APKINDEX.tar.gz
+OK: 32 MiB in 59 packages
+Removing intermediate container 93a0b2ef3282
+ ---> 5851cf952402
+Step 5/19 : LABEL com.veea.authorisation.allowExternalStorage="true"
+ ---> Running in f1bcf5ae8db0
+Removing intermediate container f1bcf5ae8db0
+ ---> af298be4c79a
+Step 6/19 : ENV LOCALFILE="logo-veea-inc.png"
+ ---> Running in 8170048a151e
+Removing intermediate container 8170048a151e
+ ---> 71a192a10243
+Step 7/19 : RUN chmod 777 /app/${LOCALFILE}
+ ---> Running in 830ec03b0120
+Removing intermediate container 830ec03b0120
+ ---> 405501e339d8
+Step 8/19 : WORKDIR "/var/lib/veea/external_storage"
+ ---> Running in 17c802a3581f
+Removing intermediate container 17c802a3581f
+ ---> 42feda32c950
+Step 9/19 : LABEL com.veea.vhc.target="vhx09-10"
+ ---> Running in 7211343b4c78
+Removing intermediate container 7211343b4c78
+ ---> 3fd3db83a4cc
+Step 10/19 : LABEL com.veea.vhc.version="0.6.0"
+ ---> Running in e375da88cca8
+Removing intermediate container e375da88cca8
+ ---> 2727fb3751d7
+Step 11/19 : LABEL com.veea.vhc.app.name="vh storage example"
+ ---> Running in ed14f8194433
+Removing intermediate container ed14f8194433
+ ---> 04d7d3a6ff05
+Step 12/19 : LABEL com.veea.vhc.app.version="1.0.0"
+ ---> Running in 1bc494887ead
+Removing intermediate container 1bc494887ead
+ ---> 2a2a93f0ce9c
+Step 13/19 : LABEL com.veea.vhc.config.proj.version="2"
+ ---> Running in 000d04e43d1e
+Removing intermediate container 000d04e43d1e
+ ---> d8973f98c838
+Step 14/19 : LABEL com.veea.vhc.config.user.version="2"
+ ---> Running in f3776670111c
+Removing intermediate container f3776670111c
+ ---> 38fdb7bc8051
+Step 15/19 : ARG PARTNER_ID
+ ---> Running in c95be636ae28
+Removing intermediate container c95be636ae28
+ ---> 5f780beca760
+Step 16/19 : LABEL com.veea.image.persistent_uuid="$PARTNER_ID-0530-414E-A085-33EE1AB02E94"
+ ---> Running in 139bb476068f
+Removing intermediate container 139bb476068f
+ ---> d536e7bc3224
+Step 17/19 : LABEL com.veea.authorisation.allowOnUnauthenticatedHost="true"
+ ---> Running in fac0f3ddfaf6
+Removing intermediate container fac0f3ddfaf6
+ ---> f816428af50b
+Step 18/19 : LABEL com.veea.authorisation.feature1="DEVELOPER"
+ ---> Running in 3fd1f9bff3c8
+Removing intermediate container 3fd1f9bff3c8
+ ---> a7d68f8db8fa
+Step 19/19 : CMD ["/bin/bash", "/app/loop.sh"]
+ ---> Running in 646b70290ab5
+Removing intermediate container 646b70290ab5
+ ---> a8547587eb36
+Successfully built a8547587eb36
+Successfully tagged vh_storage_example-arm64v8:1.0.0
+
+
+Saving vh_storage_example image for vhx09-10.
+Making vh_storage_example image for vhc05 target...
+Dockerfile is newer than Dockerfile.vhc05.
+Generating Dockerfile for Dockerfile.vhc05...
+Dockerfile.vhc05 is newer than bin/vh_storage_example-armhf:1.0.0.tar.
+Building vh_storage_example image for vhc05...
+Command Started
+Sending build context to Docker daemon   70.2MB
+Step 1/19 : FROM balenalib/armv7hf-alpine:latest
+ ---> a12ead335de1
+Step 2/19 : RUN mkdir /app
+ ---> Using cache
+ ---> 7a5c9be45a1f
+Step 3/19 : COPY src/ /app
+ ---> 95ae356445bd
+Step 4/19 : RUN apk add --no-cache bash
+ ---> Running in 72db38e081a1
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/armv7/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/armv7/APKINDEX.tar.gz
+OK: 22 MiB in 60 packages
+Removing intermediate container 72db38e081a1
+ ---> f8f32c5bc629
+Step 5/19 : LABEL com.veea.authorisation.allowExternalStorage="true"
+ ---> Running in cbe4d0a99faf
+Removing intermediate container cbe4d0a99faf
+ ---> 269336530a26
+Step 6/19 : ENV LOCALFILE="logo-veea-inc.png"
+ ---> Running in 58df2c7f657c
+Removing intermediate container 58df2c7f657c
+ ---> e7e4269800b1
+Step 7/19 : RUN chmod 777 /app/${LOCALFILE}
+ ---> Running in 3c7c9f235cf1
+Removing intermediate container 3c7c9f235cf1
+ ---> 2bb6bc14aaf2
+Step 8/19 : WORKDIR "/var/lib/veea/external_storage"
+ ---> Running in 5f54cb41df6f
+Removing intermediate container 5f54cb41df6f
+ ---> 808dca1f7b7a
+Step 9/19 : LABEL com.veea.vhc.target="vhc05"
+ ---> Running in 0cf6ef8ab6da
+Removing intermediate container 0cf6ef8ab6da
+ ---> 8a7151661dd0
+Step 10/19 : LABEL com.veea.vhc.version="0.6.0"
+ ---> Running in 0b5c97bda4f7
+Removing intermediate container 0b5c97bda4f7
+ ---> a619b74b1fc3
+Step 11/19 : LABEL com.veea.vhc.app.name="vh storage example"
+ ---> Running in b1d0e6cccb36
+Removing intermediate container b1d0e6cccb36
+ ---> 49609129481a
+Step 12/19 : LABEL com.veea.vhc.app.version="1.0.0"
+ ---> Running in df43fcc4475c
+Removing intermediate container df43fcc4475c
+ ---> 948e95367a27
+Step 13/19 : LABEL com.veea.vhc.config.proj.version="2"
+ ---> Running in 25d3404b3605
+Removing intermediate container 25d3404b3605
+ ---> 7c43ec7eb5cd
+Step 14/19 : LABEL com.veea.vhc.config.user.version="2"
+ ---> Running in ae878f7b984e
+Removing intermediate container ae878f7b984e
+ ---> 5180c32215f7
+Step 15/19 : ARG PARTNER_ID
+ ---> Running in 5b208c78a93f
+Removing intermediate container 5b208c78a93f
+ ---> c4e01d2126ca
+Step 16/19 : LABEL com.veea.image.persistent_uuid="$PARTNER_ID-0530-414E-A085-33EE1AB02E94"
+ ---> Running in e0c4241a9c13
+Removing intermediate container e0c4241a9c13
+ ---> f75b9a9f7b59
+Step 17/19 : LABEL com.veea.authorisation.allowOnUnauthenticatedHost="true"
+ ---> Running in 7dce674fd133
+Removing intermediate container 7dce674fd133
+ ---> c6c0e3d16f26
+Step 18/19 : LABEL com.veea.authorisation.feature1="DEVELOPER"
+ ---> Running in 3800d75af954
+Removing intermediate container 3800d75af954
+ ---> 468f71ee0cb3
+Step 19/19 : CMD ["/bin/bash", "/app/loop.sh"]
+ ---> Running in e96a2c7b152f
+Removing intermediate container e96a2c7b152f
+ ---> b36ad0908bb3
+Successfully built b36ad0908bb3
+Successfully tagged vh_storage_example-armhf:1.0.0
+
+
+Saving vh_storage_example image for vhc05.
+Making release for vh_storage_example...
+ERROR: Image 'bin/vh_storage_example-arm64v8:1.0.0-metadata.json' metadata does not exist.
+
+```
+
+## 2. Create Image
+
+```bash
+$ vhc hub image --create bin/vh_storage_example-arm64v8\:1.0.0.tar 
+Creating image push for file [bin/vh_storage_example-arm64v8:1.0.0.tar] on E09CCW00C0B000001277:9000 (https://192.168.1.3:9000/images/push)...
+ 40.21 MB / 40.21 MB [===========================================================================================================================================================] 100.00%
+{"image_id": "a8547587eb368cd92f0c35fda54f2bac5275de98244a1bb0f3f416899facfb23"}
+```
+
+## 3. Create Container
+
+```bash
+$ vhc hub image --create-container a8547587eb368cd92f0c35fda54f2bac5275de98244a1bb0f3f416899facfb23
+Creating container from image a8547587eb368cd92f0c35fda54f2bac5275de98244a1bb0f3f416899facfb23 on E09CCW00C0B000001277:9000 (https://192.168.1.3:9000/images/a8547587eb368cd92f0c35fda54f2bac5275de98244a1bb0f3f416899facfb23/create_container)...
+ 322 B / 322 B [=================================================================================================================================================================] 100.00%
+{
+  "container_id": "64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2",
+  "detached": false
+}
+```
+
+## 4. Start Container
+
+```bash
+$ vhc hub container --start 64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2
+Starting container 64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2 E09CCW00C0B000001277:9000 (https://192.168.1.3:9000/containers/64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2/start)...
+Success
+```
+
+## 5. Attach to Container
+
+### Running the Example
+
+Commands used in the example below.
+> ls
+> 
+> /bin/bash /app/storage-example.sh
+> 
+> ls /var/lib/veea/external_storage/sda1/64183d2e3b12
+> 
+> exit
+
+
+```bash
+$ vhc hub container --attach 64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2 /bin/bash
+Attaching to stdin/stdout/stderr on E09CCW00C0B000001277:9001...
+Attaching to container 64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2 E09CCW00C0B000001277:9000 (https://192.168.1.3:9000/containers/64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2/attach)...
+Success
+ls
+sda1
+
+/bin/bash /app/storage-example.sh
+vh storage example
+Running on 64183d2e3b12
+
+Checking devices: /var/lib/veea/external_storage/mmcblk1p1 /var/lib/veea/external_storage/sda1 /var/lib/veea/external_storage/sdb1 /var/lib/veea/external_storage/sdc1
+/var/lib/veea/external_storage/mmcblk1p1 not found!
+/var/lib/veea/external_storage/sdb1 not found!
+/var/lib/veea/external_storage/sdc1 not found!
+
+Found Storage: /var/lib/veea/external_storage/sda1
+
+Checking Directories...
+making /var/lib/veea/external_storage/sda1/64183d2e3b12
+
+Testing file creation...
+Writing to /var/lib/veea/external_storage/sda1/64183d2e3b12/helloworld.txt
+Result:
+Hello, World!
+EOF
+
+
+Testing file copy...
+Copying logo-veea-inc.png -> /var/lib/veea/external_storage/sda1/64183d2e3b12/logo-veea-inc.png
+Contents of  /var/lib/veea/external_storage/sda1/64183d2e3b12:
+helloworld.txt
+logo-veea-inc.png
+
+ls /var/lib/veea/external_storage/sda1/64183d2e3b12
+helloworld.txt
+logo-veea-inc.png
+
+exit
+read tcp 10.0.3.15:33946->192.168.1.3:9001: use of closed network connection
+read tcp 10.0.3.15:33944->192.168.1.3:9001: use of closed network connection
+Detaching from container 64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2 E09CCW00C0B000001277:9000 (https://192.168.1.3:9000/containers/64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2/detach)...
+Success
+```

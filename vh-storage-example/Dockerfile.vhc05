@@ -6,17 +6,36 @@
 
 
 #BEGIN vhc05
-FROM arm32v7/alpine:3.9
+FROM balenalib/armv7hf-alpine:latest
 #END
 
 
 RUN mkdir /app
+
 COPY src/ /app
 
 RUN apk add --no-cache bash
 
 LABEL com.veea.authorisation.allowExternalStorage="true"
 
-WORKDIR /var/lib/veea
+ENV LOCALFILE="logo-veea-inc.png"
 
-# CMD ["./app/storage-example.sh"]
+RUN chmod 777 /app/${LOCALFILE}
+
+WORKDIR "/var/lib/veea/external_storage"
+
+#BEGIN AUTO-GENERATED - DO NOT EDIT!!!
+LABEL com.veea.vhc.target="vhc05"
+LABEL com.veea.vhc.version="0.6.0"
+LABEL com.veea.vhc.app.name="vh storage example"
+LABEL com.veea.vhc.app.version="1.0.0"
+LABEL com.veea.vhc.config.proj.version="2"
+LABEL com.veea.vhc.config.user.version="2"
+ARG PARTNER_ID
+LABEL com.veea.image.persistent_uuid="$PARTNER_ID-0530-414E-A085-33EE1AB02E94"
+LABEL com.veea.authorisation.allowOnUnauthenticatedHost="true"
+LABEL com.veea.authorisation.feature1="DEVELOPER"
+#END AUTO-GENERATED - DO NOT EDIT!!!
+
+CMD ["/bin/bash", "/app/loop.sh"]
+# CMD ["bash", "/app/storage-example.sh"]
