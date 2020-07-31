@@ -27,4 +27,4 @@ RUN chmod 777 /app/${LOCALFILE}
 
 WORKDIR "/var/lib/veea/external_storage"
 
-CMD ["/bin/bash", "/app/loop.sh"]
+CMD ["/bin/bash", "/app/storage-example.sh"]

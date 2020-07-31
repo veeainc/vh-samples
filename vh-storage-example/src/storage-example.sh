@@ -69,3 +69,7 @@ for DIR in ${STORAGE[*]}; do
     echo
 done
 echo
+
+while true; do
+    sleep 60
+done

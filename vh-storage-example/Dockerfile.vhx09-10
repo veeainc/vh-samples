@@ -37,5 +37,4 @@ LABEL com.veea.authorisation.allowOnUnauthenticatedHost="true"
 LABEL com.veea.authorisation.feature1="DEVELOPER"
 #END AUTO-GENERATED - DO NOT EDIT!!!
 
-CMD ["/bin/bash", "/app/loop.sh"]
-# CMD ["bash", "/app/storage-example.sh"]
+CMD ["/bin/bash", "/app/storage-example.sh"]
