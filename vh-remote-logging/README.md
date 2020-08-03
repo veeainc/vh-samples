@@ -49,22 +49,22 @@ Success
 
 ## Pull Down the Application
 
-To instantiate the Webcam Demo template application:
+To instantiate the remote logging demo template application:
 
 ```bash
-$ vhc new -t vh_webcam_demo
-2019/10/08 07:47:47 Creating app from template vh_webcam_demo.
-Using vh_webcam_demo
-2019/10/08 07:47:47 Creating application directory: vh_webcam_demo
-2019/10/08 07:47:47 vh_webcam_demo.zip downloaded
+$ vhc new -t vh-remote-logging
+2019/10/08 07:47:47 Creating app from template vh-remote-logging.
+Using vh-remote-logging
+2019/10/08 07:47:47 Creating application directory: vh-remote-logging
+2019/10/08 07:47:47 vh-remote-logging.zip downloaded
 2019/10/08 07:47:47 Unzipping...
-2019/10/08 07:47:47 Unzipped vh_webcam_demo.zip to vh_webcam_demo
+2019/10/08 07:47:47 Unzipped vh-remote-logging.zip to vh-remote-logging
 ```
 
-Change to the Webcam Demo directory:
+Change to the remote logging demo directory:
 
 ```bash
- cd vh_webcam_demo
+ cd vh-remote-logging
 ```
 
 ## Set the Container to Untrusted Mode
@@ -198,6 +198,18 @@ Creating container from image 9ed40f244c25e71711796a327a8685e108e1003f86ab2a7600
   "container_id": "08e3c3890013744826dd04a5c30db639232fb2a6ba21a3d2f3c4bca9834d1774",
   "detached": false
 }
+```
+
+## Put the syslog config on the container
+
+Add the ip and port config for your syslog server
+
+```bash
+$ vhc hub container --put-syslog 08e3c3890013744826dd04a5c30db639232fb2a6ba21a3d2f3c4bca9834d1774 --hub-id 0579 log-config.json 
+Put syslog for container 08e3c3890013744826dd04a5c30db639232fb2a6ba21a3d2f3c4bca9834d1774 from E09BCW00C0B000000579:9000 (https://192.168.1.190:9000/containers/08e3c3890013744826dd04a5c30db639232fb2a6ba21a3d2f3c4bca9834d1774/syslog)...
+Success
+```
+
 
 ```
 ## Configure Remote Syslog Server to Listen for Incoming UDP syslog messages
@@ -283,7 +295,7 @@ nothing to see
 
 ## Stop the Container
 
-To stop the Webcam Demo container, run:
+To stop the remote logging demo container, run:
 
 ```bash
 $ vhc hub container --stop ecfd7e83b757945ba9da76d86356738b386e6ddb9cfb17d490c2a884be5081ea
@@ -293,7 +305,7 @@ Success
 
 ## Delete the Container
 
-To delete the Webcam Demo container, run:
+To delete the remote logging demo container, run:
 
 ```bash
 $ vhc hub container --delete ecfd7e83b757945ba9da76d86356738b386e6ddb9cfb17d490c2a884be5081ea
@@ -302,7 +314,7 @@ Deleting container ecfd7e83b757945ba9da76d86356738b386e6ddb9cfb17d490c2a884be508
 
 ## Delete the Image
 
-To delete the Webcam Demo image, run:
+To delete the remote logging demo image, run:
 
 ```bash
 $ vhc hub image --delete 39df6eb333c16f30e3efdb8de10e152eea30517b300bae7534bcfa6293f48157
