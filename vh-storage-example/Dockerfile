@@ -6,11 +6,11 @@
 
 
 #BEGIN vhc05
-FROM balenalib/armv7hf-alpine:latest
+FROM balenalib/armv7hf-alpine:latest-run
 #END
 
 #BEGIN vhx09-10
-FROM balenalib/aarch64-alpine:latest
+FROM balenalib/aarch64-alpine:latest-run
 #END
 
 RUN mkdir /app

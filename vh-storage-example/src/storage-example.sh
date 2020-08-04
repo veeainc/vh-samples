@@ -6,7 +6,7 @@ echo
 
 ROOT="/var/lib/veea/external_storage"
 # ROOT="/tmp"
-STORAGE=($ROOT/mmcblk1p1 $ROOT/sda1 $ROOT/sdb1 $ROOT/sdc1)
+STORAGE=($ROOT/mmcblk* $ROOT/sd??)
 
 # Test if the folders exists
 echo "Checking devices: ${STORAGE[@]}"
