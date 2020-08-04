@@ -1,6 +1,32 @@
 # VS Storage Example
 
-## Basic Steps:
+- [VS Storage Example](#vs-storage-example)
+  - [Basic Steps](#basic-steps)
+  - [Prerequisites](#prerequisites)
+  - [Setup Your Hub](#setup-your-hub)
+    - [Pull Down the Application](#pull-down-the-application)
+      - [Set the Container to Untrusted Mode](#set-the-container-to-untrusted-mode)
+      - [Set the UUID](#set-the-uuid)
+    - [Build the Image](#build-the-image)
+    - [Create the Image](#create-the-image)
+    - [Create the Container](#create-the-container)
+    - [Manage the Container](#manage-the-container)
+      - [Start the Container](#start-the-container)
+      - [Browse the Container Webpage](#browse-the-container-webpage)
+      - [Stop the Container](#stop-the-container)
+      - [Delete the Container](#delete-the-container)
+      - [Delete the Image](#delete-the-image)
+      - [Attach to STDIO](#attach-to-stdio)
+        - [Check directories](#check-directories)
+  - [Example](#example)
+    - [1. Build](#1-build)
+    - [2. Create Image](#2-create-image)
+    - [3. Create Container](#3-create-container)
+    - [4. Start Container](#4-start-container)
+    - [5. Attach to Container](#5-attach-to-container)
+      - [Running the Example](#running-the-example)
+
+## Basic Steps
 
 1. build the image
 2. upload image to your hub
@@ -24,7 +50,7 @@ Option 2 was used in the creation of this document.
 To add your hub to your VHC configuration, run:
 
 ```bash
-$ vhc hub --add-hub 1:<serial-number>:<ipv4-addr>
+vhc hub --add-hub 1:<serial-number>:<ipv4-addr>
 ```
 
 where `1` is the hub ID. With a single hub configured there is no need to specify the hub ID via the `--hub-id` or `--active-hub` options. The commands below assume a single hub configuration.
@@ -38,7 +64,7 @@ Pinging C05BCB00C0A000001127:9000 (https://10.20.0.89:9000/ping)...
 Success
 ```
 
-## Pull Down the Application
+### Pull Down the Application
 
 To instantiate the Golang Web template application:
 
@@ -55,10 +81,10 @@ Using vh_storage_example
 Change to the Golang Web template directory:
 
 ```bash
-$ cd vh_storage_example
+cd vh_storage_example
 ```
 
-## Set the Container to Untrusted Mode
+#### Set the Container to Untrusted Mode
 
 To set the container to run untrusted:
 
@@ -67,7 +93,7 @@ $ vhc secure --unauth-host
 Project configuration modified. Please rebuild image(s).
 ```
 
-## Set the UUID
+#### Set the UUID
 
 To generate a UUID automatically, run:
 
@@ -85,7 +111,7 @@ Set UUID: <uuid>
 Project configuration modified. Please rebuild image(s).
 ```
 
-## Build the Image
+### Build the Image
 
 To build the image for the VHC05 target, run:
 
@@ -182,7 +208,7 @@ Successfully tagged vh_storage_example-armhf:1.0.0
 Saving vh_storage_example image for vhc05.
 ```
 
-## Create the Image
+### Create the Image
 
 To create the Golang Web image, run:
 
@@ -195,7 +221,7 @@ Creating image push for file [bin/vh_storage_example-armhf:1.0.0.tar] on C05BCB0
 }
 ```
 
-## Create the Container
+### Create the Container
 
 To create the Golang Web container, run:
 
@@ -209,7 +235,9 @@ Creating container from image c58e9d1261f548ed8e4a99e549cf5d6eca94a7dfeffb7191d4
 }
 ```
 
-## Start the Container
+### Manage the Container
+
+#### Start the Container
 
 To start the Golang Web container, run:
 
@@ -219,7 +247,7 @@ Starting container 9bf9e5ecf15330d6f1ece778e8c5e68f17381fe1bffcc2e348b0a3ec23e4f
 Success
 ```
 
-## Browse the Container Webpage
+#### Browse the Container Webpage
 
 To browse the container's webpage, run:
 
@@ -230,7 +258,7 @@ $ curl C05BCB00C0A000001127:9500
 
 Alternately, you can use a web browser.
 
-## Stop the Container
+#### Stop the Container
 
 To stop the Golang Web container, run:
 
@@ -240,7 +268,7 @@ Stopping container 9bf9e5ecf15330d6f1ece778e8c5e68f17381fe1bffcc2e348b0a3ec23e4f
 Success
 ```
 
-## Delete the Container
+#### Delete the Container
 
 To delete the Golang Web container, run:
 
@@ -249,7 +277,7 @@ $ vhc hub container --delete 9bf9e5ecf15330d6f1ece778e8c5e68f17381fe1bffcc2e348b
 Deleting container 9bf9e5ecf15330d6f1ece778e8c5e68f17381fe1bffcc2e348b0a3ec23e4f9a0 from C05BCB00C0A000001127:9000 (https://10.20.0.89:9000/containers/9bf9e5ecf15330d6f1ece778e8c5e68f17381fe1bffcc2e348b0a3ec23e4f9a0)...
 ```
 
-## Delete the Image
+#### Delete the Image
 
 To delete the Golang Web image, run:
 
@@ -258,8 +286,7 @@ $ vhc hub image --delete c58e9d1261f548ed8e4a99e549cf5d6eca94a7dfeffb7191d4c7be2
 Deleting image c58e9d1261f548ed8e4a99e549cf5d6eca94a7dfeffb7191d4c7be2f732baa9f from C05BCB00C0A000001127:9000 (https://10.20.0.89:9000/images/c58e9d1261f548ed8e4a99e549cf5d6eca94a7dfeffb7191d4c7be2f732baa9f)...
 ```
 
-
-## Attach to STDIO
+#### Attach to STDIO
 
 **NOTE:** It is recommended to use bash
 
@@ -295,11 +322,12 @@ To exit the "terminal" enter either `exit` or hit `Ctrl+C` or `Ctrl+D`.
 If you do not specify a command then the `attach` command will hook into the container's run-time stdio (i.e. any run-time output to stdout or stderr). Exit this mode of attach in the same manner as the previous example.
 
 Notes:
+
 - The process of attaching can take up to around 20 to 25 seconds to complete when running trusted.
 - The `can't access tty` message above may be safely ignored.
 - The `read tcp` messages above may be safely ignored.
 
-## Check directories
+##### Check directories
 
 To check the contents of the directories you can use `bash` and `ls`
 
@@ -310,10 +338,9 @@ Attaching to container 74de3f949d4eb5251de623ed3e01fa35625b3d490564832b9aca627a2
 Success
 ```
 
+## Example
 
-# Example
-
-## 1. Build
+### 1. Build
 
 ```bash
 $ vhc build
@@ -495,16 +522,16 @@ ERROR: Image 'bin/vh_storage_example-arm64v8:1.0.0-metadata.json' metadata does 
 
 ```
 
-## 2. Create Image
+### 2. Create Image
 
 ```bash
-$ vhc hub image --create bin/vh_storage_example-arm64v8\:1.0.0.tar 
+$ vhc hub image --create bin/vh_storage_example-arm64v8\:1.0.0.tar
 Creating image push for file [bin/vh_storage_example-arm64v8:1.0.0.tar] on E09CCW00C0B000001277:9000 (https://192.168.1.3:9000/images/push)...
  40.21 MB / 40.21 MB [===========================================================================================================================================================] 100.00%
 {"image_id": "a8547587eb368cd92f0c35fda54f2bac5275de98244a1bb0f3f416899facfb23"}
 ```
 
-## 3. Create Container
+### 3. Create Container
 
 ```bash
 $ vhc hub image --create-container a8547587eb368cd92f0c35fda54f2bac5275de98244a1bb0f3f416899facfb23
@@ -516,7 +543,7 @@ Creating container from image a8547587eb368cd92f0c35fda54f2bac5275de98244a1bb0f3
 }
 ```
 
-## 4. Start Container
+### 4. Start Container
 
 ```bash
 $ vhc hub container --start 64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2
@@ -524,19 +551,19 @@ Starting container 64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff
 Success
 ```
 
-## 5. Attach to Container
+### 5. Attach to Container
 
-### Running the Example
+#### Running the Example
 
 Commands used in the example below.
-> ls
-> 
-> /bin/bash /app/storage-example.sh
-> 
-> ls /var/lib/veea/external_storage/sda1/64183d2e3b12
-> 
-> exit
 
+> ls
+>
+> /bin/bash /app/storage-example.sh
+>
+> ls /var/lib/veea/external_storage/sda1/64183d2e3b12
+>
+> exit
 
 ```bash
 $ vhc hub container --attach 64183d2e3b126c087f921fb4809b998ee539aff89c354bee6981201fc7dff8a2 /bin/bash
