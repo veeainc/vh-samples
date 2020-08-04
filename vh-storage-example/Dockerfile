@@ -6,20 +6,25 @@
 
 
 #BEGIN vhc05
-FROM arm32v7/alpine:3.9
+FROM balenalib/armv7hf-alpine:latest-run
 #END
 
 #BEGIN vhx09-10
-FROM arm64v8/alpine:latest
+FROM balenalib/aarch64-alpine:latest-run
 #END
 
 RUN mkdir /app
+
 COPY src/ /app
 
 RUN apk add --no-cache bash
 
 LABEL com.veea.authorisation.allowExternalStorage="true"
 
-WORKDIR /var/lib/veea
+ENV LOCALFILE="logo-veea-inc.png"
 
-# CMD ["./app/storage-example.sh"]
+RUN chmod 777 /app/${LOCALFILE}
+
+WORKDIR "/var/lib/veea/external_storage"
+
+CMD ["/bin/bash", "/app/storage-example.sh"]

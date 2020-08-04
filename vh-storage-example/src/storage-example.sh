@@ -1,10 +1,12 @@
+#!/bin/bash
+
 echo "vh storage example"
 echo "Running on $HOSTNAME"
 echo
 
-ROOT="var/lib/veea/external_storage"
+ROOT="/var/lib/veea/external_storage"
 # ROOT="/tmp"
-STORAGE=($ROOT/mmcblk1p1 $ROOT/sda1 $ROOT/sdb1 $ROOT/sdc1)
+STORAGE=($ROOT/mmcblk* $ROOT/sd??)
 
 # Test if the folders exists
 echo "Checking devices: ${STORAGE[@]}"
@@ -51,7 +53,6 @@ echo
 
 # Test File Copy
 echo "Testing file copy..."
-LOCALFILE="logo-veea-inc.png"
 
 for DIR in ${STORAGE[*]}; do
     TARGET=$DIR/$HOSTNAME
@@ -60,7 +61,7 @@ for DIR in ${STORAGE[*]}; do
     [ -f $TARGETFILE ] && rm $TARGETFILE
 
     echo "Copying $LOCALFILE -> $TARGETFILE"
-    cp $LOCALFILE $TARGETFILE
+    cp /app/$LOCALFILE $TARGETFILE
 
     echo "Contents of  $TARGET:"
     ls $TARGET
@@ -68,4 +69,7 @@ for DIR in ${STORAGE[*]}; do
     echo
 done
 echo
-echo "Done!"
+
+while true; do
+    sleep 60
+done
