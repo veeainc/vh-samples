@@ -23,6 +23,7 @@ LABEL com.veea.authorisation.allowExternalStorage="true"
 
 ENV LOCALFILE="logo-veea-inc.png"
 
+RUN chmod 777 /app/storage-example.sh
 RUN chmod 777 /app/${LOCALFILE}
 
 WORKDIR "/var/lib/veea/external_storage"
