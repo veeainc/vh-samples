@@ -1,0 +1,33 @@
+app: vh redis
+app_info:
+  container: application
+  deployment: single
+  description: Sample container that demonstrates running redis
+  language: node
+  node_types:
+  - MEN
+  targets:
+  - vhc05
+  - vhx09-10
+  type: app
+  version: 1.0.0
+  view: :9100
+docker:
+  ports:
+    publish:
+    - 6379:6379
+  secure:
+    arg:
+      partner_features: []
+    label:
+      devices: []
+      features:
+      - DEVELOPER
+      unauth_host: true
+      uuid: 1B13E48A-273F-4C36-8D29-17CF99FDAEF1
+      volumes:
+        offers: []
+        persists:
+        - redis-volume
+        requests: []
+version: 2
