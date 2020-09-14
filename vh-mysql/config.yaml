@@ -1,0 +1,27 @@
+app: vh mysql
+app_info:
+  container: application
+  deployment: single
+  description: Sample container that demonstrates mysql
+  node_types:
+  - MEN
+  targets:
+  - vhx09-10
+  - vhc05
+  type: app
+  version: 1.0.0
+  view: 9100
+docker:
+  secure:
+    arg:
+      licenses: []
+    label:
+      features:
+      - DEVELOPER
+      unauth_host: true
+      uuid: C1BDD472-3800-4150-A966-41911B52E80C
+      volumes:
+        offers: []
+        persists: []
+        requests: []
+version: 2
