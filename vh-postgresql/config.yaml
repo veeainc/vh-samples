@@ -1,0 +1,31 @@
+app: vh postgres
+app_info:
+  container: application
+  deployment: single
+  description: Sample container that demonstrates using a webcam
+  node_types:
+  - MEN
+  targets:
+  - vhx09-10
+  - vhc05
+  type: app
+  version: 1.0.0
+  view: 9100
+docker:
+  ports:
+    publish: []
+  secure:
+    arg:
+      licenses: []
+    label:
+      devices: []
+      features:
+      - DEVELOPER
+      unauth_host: true
+      uuid: 55708099-9C9F-4191-867C-D008742BE0B1
+      volumes:
+        offers: []
+        persists:
+        - postgress-volume
+        requests: []
+version: 2
