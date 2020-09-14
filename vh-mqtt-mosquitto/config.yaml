@@ -1,0 +1,37 @@
+app: vh mqtt mosquitto
+app_info:
+  deployment: single
+  language: python
+  targets:
+  - vhc05
+  - vhx09-10
+  type: app
+  version: 1
+  view: :9100
+docker:
+  build_arm32:
+  - EXPOSE 1883
+  - EXPOSE 9001
+  build_arm64:
+  - EXPOSE 1883
+  - EXPOSE 9001
+  cmd: mosquitto -v -c /mosquitto/config/mosquitto.conf
+  image_arm32: arm32v6/eclipse-mosquitto:latest
+  image_arm64: arm64v8/eclipse-mosquitto:latest
+  ports:
+    publish:
+    - 21400:1883
+    - 9011:9001
+  secure:
+    arg:
+      licenses: []
+    label:
+      devices: []
+      features:
+      - DEVELOPER
+      unauth_host: true
+      uuid: 00000000-BA5E-5EED-C0DE-000000000113
+      volumes:
+        offers: []
+        persists: []
+        requests: []
