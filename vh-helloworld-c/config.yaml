@@ -22,7 +22,7 @@ docker:
       features:
       - DEVELOPER
       unauth_host: true
-      uuid: 00000005-BA5E-5EED-C0DE-000000000013
+      uuid: 7F5C7C0A-BB99-4481-952E-32CD6487301B
       volumes:
         offers: []
         persists: []
