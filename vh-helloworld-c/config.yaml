@@ -1,0 +1,30 @@
+app: vh hello world in c
+app_info:
+  container: application
+  deployment: single
+  description: Sample for compiling c code
+  node_types:
+  - MEN
+  targets:
+  - vhx09-10
+  - vhc05
+  type: app
+  version: 1.0.0
+  view: :9100
+docker:
+  ports:
+    publish:
+  secure:
+    arg:
+      partner_features: []
+    label:
+      devices: []
+      features:
+      - DEVELOPER
+      unauth_host: true
+      uuid: 00000005-BA5E-5EED-C0DE-000000000013
+      volumes:
+        offers: []
+        persists: []
+        requests: []
+version: 2
