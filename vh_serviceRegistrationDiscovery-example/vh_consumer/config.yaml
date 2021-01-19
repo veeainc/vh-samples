@@ -1,0 +1,33 @@
+app: vh_consumer
+app_info:
+  container: application
+  deployment: single
+  description: sample container that demonstrate to get the key value from Redis
+  language: node
+  node_types:
+  - MEN
+  targets:
+  - vhx09-10
+  - vhc05
+  type: app
+  version: 1.0.0
+  view: :9100
+docker:
+  ports:
+    publish: []
+  secure:
+    arg:
+      partner_features: []
+    label:
+      devices: []
+      features:
+      - DEVELOPER
+      unauth_host: true
+      uuid: 15587ADA-C267-4A67-87E8-27650E59ED71
+      volumes:
+        offers: []
+        persists:
+        - vh_consumer
+        - vbus
+        requests: []
+version: 2
