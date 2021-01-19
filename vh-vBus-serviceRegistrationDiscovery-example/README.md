@@ -1,9 +1,9 @@
-Service Registration and Discovery Sample
-===========================================
+Sample Project of Service Registration and Discovery on vBus
+=========================================================
 
 ## Objective:
 
-The objective of this sample project is to explain the concept of Service Registration and Discovery. In this project, we use vbus-cmd to register and discover services on vBus
+The objective of this sample project is to explain the concept of Service Registration and Discovery on vBus. In this project, we use vbus-cmd to register and discover services on vBus
 
 There are three applications in this project:
 
