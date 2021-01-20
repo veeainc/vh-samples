@@ -1,0 +1,34 @@
+app: vh_publisher
+app_info:
+  container: application
+  deployment: single
+  description: sample container that demonstrate the publishing the value to redis
+    on veea hub
+  language: node
+  node_types:
+  - MEN
+  targets:
+  - vhx09-10
+  - vhc05
+  type: app
+  version: 1.0.0
+  view: :9100
+docker:
+  ports:
+    publish: []
+  secure:
+    arg:
+      partner_features: []
+    label:
+      devices: []
+      features:
+      - DEVELOPER
+      unauth_host: true
+      uuid: ACA56C14-2622-428E-8B78-359F97622519
+      volumes:
+        offers: []
+        persists:
+        - vh_publisher
+        - vbus
+        requests: []
+version: 2
