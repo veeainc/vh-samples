@@ -1,0 +1,29 @@
+select
+a.applicationID,
+a.EventEnqueuedUtcTime,
+a.deviceName,
+datepart(year,a.EventEnqueuedUtcTime) as event_year,
+datepart(month,a.EventEnqueuedUtcTime) as event_month,
+datepart(day,a.EventEnqueuedUtcTime) as event_day,
+datepart(hour,a.EventEnqueuedUtcTime) as event_hour,
+datepart(minute,a.EventEnqueuedUtcTime) as event_minute,
+CONCAT(DATEPART(hour, a.EventEnqueuedUtcTime), ':', DATEPART(minute, a.EventEnqueuedUtcTime)) AS Time,
+CONCAT(DATEPART(year, a.EventEnqueuedUtcTime), '-', DATEPART(month, a.EventEnqueuedUtcTime), '-', DATEPART(day, a.EventEnqueuedUtcTime)) AS Date,
+rinfo.ArrayValue.gatewayID,
+rinfo.ArrayValue.uplinkID,
+rinfo.ArrayValue.name,
+--rinfo.ArrayValue.location.latitude,
+--rinfo.ArrayValue.location.longitude,
+--rinfo.ArrayValue.location.altitude,
+GetRecordPropertyValue(a.tags,'latitude') as latitude,
+GetRecordPropertyValue(a.tags,'longitude') as longitude,
+GetRecordPropertyValue(a.tags,'altitude') as altitude,
+GetRecordPropertyValue(a.object,'BatV') as batv,
+GetRecordPropertyValue(a.object,'conduct_SOIL') as conduct_SOIL,
+(cast(GetRecordPropertyValue(a.object,'temp_SOIL') as float)*9/5)+32 as temp_SOIL,
+GetRecordPropertyValue(a.object,'water_SOIL') as water_SOIL
+INTO
+[CeresCrops63FarmSoilOutput]
+FROM
+[CeresCrops63FarmSoilInput] a
+CROSS APPLY GetArrayElements(a.rxinfo) as rinfo
